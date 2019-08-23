@@ -1,11 +1,11 @@
 <div class="card h-100">
     <div class="card-header">
-        <h4 class="m-auto">{{ repo.name }}</h4>
+        <h4 class="m-auto">{{ repo['name'] }}</h4>
     </div>
     <div class="card-body">
-        <p class="card-text" *ngIf="repo.language!=null">Language : <strong>{{ repo['language'] }}</strong></p>
-        <p class="card-text" *ngIf="repo.description!=null; else temp">{{ repo.description|description }}</p>
-        <a [href]="repo.svn_url" class="btn btn-primary">See Repository</a>
+        <p class="card-text" *ngIf="repo['language']!=null">Language : <strong>{{ repo['language'] }}</strong></p>
+        <p class="card-text" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
+        <a [href]="repo['svn_url']" class="btn btn-primary">See Repository</a>
     </div>
 </div>
 <ng-template #temp>
