@@ -42,7 +42,7 @@ export class DataService {
     return throwError(new AppError(error))
   }
   searchRepositories(query:string,page:number){
-    return this.http.get(`http://api.github.com/search/repositories?q=${query}&page=${page}&per_page=12`).pipe(map(response=>{
+    return this.http.get(`https://api.github.com/search/repositories?q=${query}&page=${page}&per_page=12`).pipe(map(response=>{
       console.log(response)
       return response
     }),catchError(this.handleError))
