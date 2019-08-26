@@ -8,7 +8,7 @@ const routes: Routes = [
   {path:'about/:username',component:AboutComponent},
   {path:'about',component:AboutComponent},
   {path:'repository',component:ReposComponent},
-  {path:'repository/:query',component:ReposComponent}
+  {path:'repository/:query/:pageno',component:ReposComponent}
 ];
 
 @NgModule({

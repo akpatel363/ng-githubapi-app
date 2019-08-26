@@ -23,4 +23,7 @@ export class NavigationComponent implements OnInit {
       this.router.navigate(['/about',formsValue.gitUsername])
     }
   }
+  visibleSearchBar(){
+    return this.router.url.includes('\about')
+  }
 }

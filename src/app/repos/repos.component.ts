@@ -13,20 +13,19 @@ export class ReposComponent implements OnInit{
   repos = []
   totalResults:number
   currentResults:number
-  currentPage = 1;
+  currentPage:number
   query:string
   constructor(private service:DataService,private formBuilder:FormBuilder,private router:Router,private route:ActivatedRoute) {}
   searched(query:string){
     if(this.searchGroup.valid){
       this.resetProperties()
-      this.router.navigate(['/repository',query])
+      this.router.navigate(['/repository',query,1])
       console.log(this.router.url)
     }
   }
   resetProperties(){
     this.query = null
     this.repos = null
-    this.currentPage = 1
     this.currentResults = null
     this.totalResults = null
   }
@@ -34,6 +33,7 @@ export class ReposComponent implements OnInit{
     this.route.paramMap.subscribe((params)=>{
       if(params.get('query')!=null){
         this.query = params.get('query')
+        this.currentPage = Number.parseInt(params.get('pageno'))
         this.searchRepos()
       }
     })
@@ -56,10 +56,8 @@ export class ReposComponent implements OnInit{
   }
   pageChanged(no:number){
     if(no>=1&&this.currentResults==12&&no!=this.currentPage){
-      this.currentPage = no
-      this.repos = null
-      this.currentResults = 0
-      this.searchRepos()
+      this.router.navigate(['/repository',this.query,no])
+      this.resetProperties()
     }
   }
 }
