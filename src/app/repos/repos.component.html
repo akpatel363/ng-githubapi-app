@@ -18,7 +18,7 @@
     <nav class="mt-2">
         <ul class="pagination justify-content-center">
         <li class="page-item" (click)="pageChanged(currentPage-1)" [ngClass]="{disabled: currentPage==1}"><a class="page-link">Previous</a></li>
-            <li class="page-item active"><a class="page-link" href="">{{currentPage}}</a></li>
+            <li class="page-item active"><a class="page-link">{{currentPage}}</a></li>
             <li class="page-item" (click)="pageChanged(currentPage+1)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+1}}</a></li>
             <li class="page-item" (click)="pageChanged(currentPage+2)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+2}}</a></li>
             <li class="page-item" (click)="pageChanged(currentPage+1)" [ngClass]="{disabled: currentResults<12}"><a class="page-link">Next</a></li>

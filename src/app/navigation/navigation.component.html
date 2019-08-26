@@ -8,7 +8,7 @@
             <li class="nav-item"><a routerLink="/about" routerLinkActive="active" class="nav-link">Users</a></li>
             <li class="nav-item"><a routerLink="/repository" routerLinkActive="active" class="nav-link">Repository</a></li>
         </ul>
-        <form class="form-inline" [formGroup]="formGroup" (ngSubmit)="showData(formGroup.value)">
+        <form class="form-inline" [formGroup]="formGroup" (ngSubmit)="showData(formGroup.value)" *ngIf="router.url.includes('about')">
             <input type="text" class="form-control my-2 my-sm-0 mx-0 mx-sm-2" name="GitUsername" placeholder="Search Here" formControlName="gitUsername">
             <button type="submit" class="btn btn-success">Search</button>
         </form>

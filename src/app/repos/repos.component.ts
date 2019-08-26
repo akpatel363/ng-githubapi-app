@@ -55,7 +55,7 @@ export class ReposComponent implements OnInit{
     console.log('got data')
   }
   pageChanged(no:number){
-    if(no>=1&&this.currentResults==12){
+    if(no>=1&&this.currentResults==12&&no!=this.currentPage){
       this.currentPage = no
       this.repos = null
       this.currentResults = 0

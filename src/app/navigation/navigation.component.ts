@@ -14,12 +14,12 @@ export class NavigationComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       gitUsername:[null,Validators.required]
     })
+    console.log(this.router.url)
   }
   ngOnInit() {}
   showData(formsValue){
     if(this.formGroup.valid){
-      console.log(formsValue)
-      console.log(this.router.onSameUrlNavigation)
+      console.log(this.router.url)
       this.router.navigate(['/about',formsValue.gitUsername])
     }
   }
