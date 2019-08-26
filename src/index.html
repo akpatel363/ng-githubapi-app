@@ -4,11 +4,42 @@
   <meta charset="utf-8">
   <title>Github API App</title>
   <base href="/">
+  <style>
+    .cont{
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .loader{
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border-left: 5px solid darkslateblue;
+      border-top: 5px solid white;
+      border-bottom: 5px solid white;
+      border-right: 5px solid darkslateblue;
+      transform-origin: center;
+      animation: rot 1s infinite ease-out alternate;
+    }
+    @keyframes rot{
+      0%{
 
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-  <app-root></app-root>
+  <app-root>
+    <div class="cont">
+      <div class="loader"></div>
+    </div>
+  </app-root>
 </body>
 </html>
