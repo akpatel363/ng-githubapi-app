@@ -5,7 +5,10 @@
     <div class="card-body">
         <p class="card-text" *ngIf="repo['language']!=null">Language : <strong>{{ repo['language'] }}</strong></p>
         <p class="card-text" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
-        <a [href]="repo['svn_url']" class="btn btn-primary">See Repository</a>
+    </div>
+    <div class="card-footer">
+        <a [href]="repo['svn_url']" class="btn btn-primary mr-2">See Repository</a>
+        <a *ngIf="repo['homepage']!=null&&repo['homepage']!=''" [href]="repo['homepage']" class="btn btn-success">Visit</a>
     </div>
 </div>
 <ng-template #temp>

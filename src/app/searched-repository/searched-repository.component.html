@@ -1,14 +1,17 @@
 <div class="card h-100">
     <div class="card-header">
-        <h3 class="m-auto">{{ repo['name'] }}</h3>
+        <h4 class="m-auto">{{ repo['name'] }}</h4>
     </div>
     <div class="card-body">
         <h5>By : <strong>{{ repo['owner']['login'] }}</strong></h5>
         <p class="card-text" *ngIf="repo['language']!=null">Language : <strong>{{ repo['language'] }}</strong></p>
         <p class="card-text">Stars : <strong>{{ repo['stargazers_count'] }}</strong></p>
         <p class="card-text" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
-        <a [href]="repo['svn_url']" class="btn btn-outline-primary mr-1">Repository</a>
-        <a [routerLink]="['/about',repo['owner']['login']]" class="btn btn-outline-success ml-1">Author</a>
+    </div>
+    <div class="card-footer">
+        <a [href]="repo['svn_url']" class="btn btn-primary mr-1">Repository</a>
+        <a [routerLink]="['/about',repo['owner']['login']]" class=" btn btn-success mr-1">Author</a>
+        <a *ngIf="repo['homepage']!=''&&repo['homepage']!=null" [href]="repo['homepage']" class="btn btn-dark">Visit</a>
     </div>
 </div>
 <ng-template #temp>
