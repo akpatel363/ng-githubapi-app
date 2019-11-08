@@ -9,8 +9,10 @@ import { AboutComponent } from './about/about.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { ReposComponent } from './repos/repos.component';
 import { AppErrorHandler } from './commons/app-error.handler';
-import { DescriptionPipe } from './description.pipe';
+import { DescriptionPipe } from './commons/description.pipe';
 import { SearchedRepositoryComponent } from './searched-repository/searched-repository.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SearchedRepositoryComponent } from './searched-repository/searched-repo
     RepositoryComponent,
     ReposComponent,
     DescriptionPipe,
-    SearchedRepositoryComponent
+    SearchedRepositoryComponent,
+    PageNotFoundComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

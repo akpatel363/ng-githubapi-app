@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from 'src/app/data.service'
+import { DataService } from 'src/app/commons/data.service'
 import { Observable, throwError } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -19,8 +19,12 @@ export class ReposComponent implements OnInit{
   searched(query:string){
     if(this.searchGroup.valid){
       this.resetProperties()
-      this.router.navigate(['/repository',query,1])
-      console.log(this.router.url)
+      this.router.navigate(['/repository'],{
+        queryParams:{
+          name:query,
+          pageno:1
+        }
+      })
     }
   }
   resetProperties(){
@@ -30,9 +34,9 @@ export class ReposComponent implements OnInit{
     this.totalResults = null
   }
   ngOnInit(){
-    this.route.paramMap.subscribe((params)=>{
-      if(params.get('query')!=null){
-        this.query = params.get('query')
+    this.route.queryParamMap.subscribe((params)=>{
+      if(params.get('name')!=null){
+        this.query = params.get('name')
         this.currentPage = Number.parseInt(params.get('pageno'))
         this.searchRepos()
       }
@@ -44,9 +48,7 @@ export class ReposComponent implements OnInit{
   searchRepos(){
     this.service.searchRepositories(this.query,this.currentPage).subscribe((response)=>{
       this.parseResults(response)
-    },(error=>{
-      throwError(error)
-    }))
+    })
   }
   parseResults(response){
     this.totalResults = response['total_count']
@@ -56,7 +58,12 @@ export class ReposComponent implements OnInit{
   }
   pageChanged(no:number){
     if(no>=1&&this.currentResults==12&&no!=this.currentPage){
-      this.router.navigate(['/repository',this.query,no])
+      this.router.navigate(['/repository'],{
+        queryParams:{
+          name:this.query,
+          pageno:no
+        }
+      })
       this.resetProperties()
     }
   }

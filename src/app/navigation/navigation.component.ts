@@ -19,8 +19,11 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {}
   showData(formsValue){
     if(this.formGroup.valid){
-      console.log(this.router.url)
-      this.router.navigate(['/about',formsValue.gitUsername])
+      this.router.navigate(['/about'],{
+        queryParams:{
+          search:formsValue.gitUsername
+        }
+      })
     }
   }
   visibleSearchBar(){

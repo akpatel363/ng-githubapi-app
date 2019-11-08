@@ -1,9 +1,9 @@
-<div class="container mt-3" *ngIf="userData!=null">
+<div class="container mt-3" *ngIf="userData!=null; else noData">
     <div class="row">
         <div class="col-12">
             <div class="row">
                 <div class="col-lg-3 col-xl-3 col-md-4 col-5">
-                    <img [src]="userData['avatar_url']" alt="Profile Picture" class="img-thumbnail">    
+                    <img [src]="userData['avatar_url']" alt="Profile Picture" class="img-thumbnail">
                 </div>
                 <div class=" col-lg-9 col-xl-9 col-md-8 col-7">
                     <h4 class="my-2"><strong>{{ userData['name'] }}</strong></h4>
@@ -17,16 +17,23 @@
         </div>
     </div>
     <div class="row">
-        <h4 *ngIf="repos.length==0; else repositories" class="m-3">No Repositories Found.....</h4>        
+        <h4 *ngIf="repos.length==0; else repositories" class="text-center mt-3">No Repositories Found.....</h4>
     </div>
 </div>
 <ng-template #repositories>
-<div class="container">
-    <h3 class="my-3">Repositories</h3>
-    <div class="row">
-        <div class="col-md-6 col-lg-4 col-xl-4 col-sm-12 py-1 px-2" *ngFor="let repo of repos">
-            <app-repository [repo]="repo"></app-repository>
+    <div class="container">
+        <h3 class="my-3">Repositories</h3>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 col-xl-4 col-sm-12 py-1 px-2" *ngFor="let repo of repos">
+                <app-repository [repo]="repo"></app-repository>
+            </div>
         </div>
     </div>
-</div>
+</ng-template>
+<ng-template #noData>
+    <div class="spinner-container text-center my-4">
+        <div class="spinner-border text-primary mt-4" style="height: 8em; width: 8em;">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 </ng-template>
