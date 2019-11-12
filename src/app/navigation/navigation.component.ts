@@ -9,24 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
-  formGroup:FormGroup
-  constructor(private formBuilder:FormBuilder,private router:Router) {
-    this.formGroup = this.formBuilder.group({
-      gitUsername:[null,Validators.required]
-    })
-    console.log(this.router.url)
-  }
+  constructor() {}
   ngOnInit() {}
-  showData(formsValue){
-    if(this.formGroup.valid){
-      this.router.navigate(['/about'],{
-        queryParams:{
-          search:formsValue.gitUsername
-        }
-      })
-    }
-  }
-  visibleSearchBar(){
-    return this.router.url.includes('\about')
-  }
 }

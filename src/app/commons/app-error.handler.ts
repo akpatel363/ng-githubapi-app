@@ -6,11 +6,11 @@ export class AppErrorHandler implements ErrorHandler{
     handleError(error){
         console.log(error)
         if(error instanceof NothingFoundError){
-            alert("Nothing Found.....")
+            console.log("Nothing Found.....")
         }else if(error instanceof NoConnectionError){
-            alert("No Connection\nPlease Refresh.....")
+            console.log("No Connection\nPlease Refresh.....")
         }else{
-            alert("Unknown Error\nPlease Refresh.....")
+            console.log("Unknown Error\nPlease Refresh.....")
         }
     }
 }

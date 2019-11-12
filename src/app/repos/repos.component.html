@@ -1,27 +1,38 @@
 <div class="container">
-    <form class="my-2" [formGroup]="searchGroup" (ngSubmit)="searched(searchGroup.value.repositoryName)">
-        <div class="form-group">
-            <label for="repository-name"><strong>Repository Name</strong></label>
-            <input type="text" class="form-control" formControlName="repositoryName" name="repository-name" id="repository-name" placeholder="Repository Name">
-        </div>
-        <button class="btn btn-info">Search</button>
+    <form class="my-3" [formGroup]="searchGroup" (ngSubmit)="searched(searchGroup.value.repositoryName)">
+        <input type="text" class="form-control" formControlName="repositoryName" name="repository-name"
+            id="repository-name" placeholder="Repository Name">
+        <button class="btn btn-info mt-2">Search</button>
     </form>
-    <div *ngIf="totalResults==null;else repositoryContainer"></div>
+    <div *ngIf="repos!=null&&repos.length!=0; else noData">
+        <h3 class="my-2">Repositories Found : {{totalResults}}</h3>
+        <div class="row my-1">
+            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 py-1" *ngFor="let repo of repos">
+                <app-searched-repository [repo]="repo"></app-searched-repository>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" (click)="pageChanged(currentPage-1)" [ngClass]="{disabled: currentPage==1}"><a class="page-link">Previous</a></li>
+                <li class="page-item active"><a class="page-link">{{currentPage}}</a></li>
+                <li class="page-item" (click)="pageChanged(currentPage+1)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+1}}</a></li>
+                <li class="page-item" (click)="pageChanged(currentPage+2)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+2}}</a></li>
+                <li class="page-item" (click)="pageChanged(currentPage+1)" [ngClass]="{disabled: currentResults<12}"><a class="page-link">Next</a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
-<ng-template #repositoryContainer>
-    <h3 class="my-2">Total Repositories Found : {{totalResults}}</h3>
-    <div class="row my-1">
-        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 py-1" *ngFor="let repo of repos">
-            <app-searched-repository [repo]="repo"></app-searched-repository>
+<ng-template #noData>
+    <div class="text-center my-3 py-3" *ngIf="!error; else errorContainer">
+        <div class="spinner-border text-success" style="height: 8em;width: 8em;">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
-    <nav class="mt-2">
-        <ul class="pagination justify-content-center">
-        <li class="page-item" (click)="pageChanged(currentPage-1)" [ngClass]="{disabled: currentPage==1}"><a class="page-link">Previous</a></li>
-            <li class="page-item active"><a class="page-link">{{currentPage}}</a></li>
-            <li class="page-item" (click)="pageChanged(currentPage+1)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+1}}</a></li>
-            <li class="page-item" (click)="pageChanged(currentPage+2)" *ngIf="currentResults==12"><a class="page-link">{{currentPage+2}}</a></li>
-            <li class="page-item" (click)="pageChanged(currentPage+1)" [ngClass]="{disabled: currentResults<12}"><a class="page-link">Next</a></li>
-        </ul>
-    </nav>
+</ng-template>
+<ng-template #errorContainer>
+    <div class="alert alert-danger">
+        <span *ngIf="error==1">No internet connection. Please check your internet connection.</span>
+        <span *ngIf="error==2">No matching repository found. Try searching a different name.</span>
+        <span *ngIf="error==3">Something went wrong.</span>
+    </div>
 </ng-template>

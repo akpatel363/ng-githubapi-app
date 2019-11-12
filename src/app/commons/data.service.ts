@@ -10,26 +10,14 @@ import { AppError } from './app.error';
   providedIn: 'root'
 })
 export class DataService {
-  constructor(private http:HttpClient) {
-    
-  }
+  constructor(private http:HttpClient) {}
   getRepos(username:string){
     return this.http.get(`https://api.github.com/users/${username}/repos`).pipe(map((response:any[])=>{
       return response
     },catchError(this.handleError)))
   }
-  getCommits(repo:Object){
-    return this.http.get(`https://api.github.com/repos/${repo['full_name']}/commits`).pipe(map((response:any)=>{
-      return Object.keys(response).length
-    },catchError(this.handleError)))
-  }
   getUser(username:string){
     return this.http.get(`https://api.github.com/users/${username}`).pipe(map((response:any)=>{
-      return response
-    }),catchError(this.handleError))
-  }
-  getContributors(projectName:string){
-    return this.http.get(`https://api.github.com/repos/${projectName}/contributors`).pipe(map(response=>{
       return response
     }),catchError(this.handleError))
   }
@@ -43,7 +31,6 @@ export class DataService {
   }
   searchRepositories(query:string,page:number){
     return this.http.get(`https://api.github.com/search/repositories?q=${query}&page=${page}&per_page=12`).pipe(map(response=>{
-      console.log(response)
       return response
     }),catchError(this.handleError))
   }

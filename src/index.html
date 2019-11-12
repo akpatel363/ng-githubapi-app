@@ -5,40 +5,62 @@
   <title>Github API App</title>
   <base href="/">
   <style>
-    .cont{
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .loader{
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      border-left: 5px solid darkslateblue;
-      border-top: 5px solid white;
-      border-bottom: 5px solid white;
-      border-right: 5px solid darkslateblue;
-      transform-origin: center;
-      animation: rot 1s infinite ease-out alternate;
-    }
-    @keyframes rot{
-      0%{
-
+      .spinner-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
       }
-      100%{
-        transform: rotate(360deg);
+      .spinner-container span {
+        border-top: 10px solid transparent;
+        border-right: 10px solid transparent;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
       }
-    }
-  </style>
+      .spinner-container span:nth-child(1) {
+        width: 180px;
+        height: 180px;
+        border-left: 10px solid royalblue;
+        border-bottom: 10px solid royalblue;
+        animation: 1.5s loader-rotate infinite linear;
+      }
+      .spinner-container span:nth-child(2) {
+        width: 150px;
+        height: 150px;
+        border-left: 10px solid tomato;
+        border-bottom: 10px solid tomato;
+        animation: 1s loader-rotate infinite linear;
+      }
+      .spinner-container span:nth-child(3) {
+        width: 120px;
+        height: 120px;
+        border-left: 10px solid gold;
+        border-bottom: 10px solid gold;
+        animation: .5s loader-rotate infinite linear;
+      }
+      @keyframes loader-rotate {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+    </style>
+  <meta name="theme-color" content="#5cb85c">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
   <app-root>
-    <div class="cont">
-      <div class="loader"></div>
+    <div class="spinner-container">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </app-root>
 </body>
