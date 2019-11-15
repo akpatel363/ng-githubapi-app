@@ -18,13 +18,13 @@
                     <p class="m-0">{{ userData['bio'] }}</p>
                     <p class="my-1">{{ userData['location'] }}</p>
                     <a *ngIf="userData['blog']!=''" [href]="userData['blog']" class="btn mt-1 btn-primary mr-2">Blog</a>
-                    <a [href]="userData['html_url']" class="btn btn-success mt-1">Github Profile</a>
+                    <a [href]="userData['html_url']" class="btn btn-success mt-1">Profile</a>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <h4 *ngIf="repos.length==0; else repositories" class="mt-3 ml-3">No Repositories Found.....</h4>
+        <h4 *ngIf="repos==null||repos.length==0; else repositories" class="mt-3 ml-3">No Repositories Found.....</h4>
     </div>
 </div>
 <ng-template #repositories>
@@ -38,14 +38,14 @@
     </div>
 </ng-template>
 <ng-template #noData>
-    <div class="spinner-container text-center my-4" *ngIf="!error; else errorContainer">
+    <div class="spinner-container text-center my-4" *ngIf="status==1; else errorContainer">
         <div class="spinner-border text-success mt-4" style="height: 8em; width: 8em;">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
 </ng-template>
 <ng-template #errorContainer>
-    <div class="container">
+    <div class="container" *ngIf="error">
         <div class="alert alert-danger">
             <span *ngIf="error==1">No internet connection. Please check your internet connection.</span>
             <span *ngIf="error==2">User not found. Try searching a different username.</span>

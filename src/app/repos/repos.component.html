@@ -4,7 +4,7 @@
             id="repository-name" placeholder="Repository Name">
         <button class="btn btn-info mt-2">Search</button>
     </form>
-    <div *ngIf="repos!=null&&repos.length!=0; else noData">
+    <div *ngIf="repos!=null; else noData">
         <h3 class="my-2">Repositories Found : {{totalResults}}</h3>
         <div class="row my-1">
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 py-1" *ngFor="let repo of repos">
@@ -23,14 +23,14 @@
     </div>
 </div>
 <ng-template #noData>
-    <div class="text-center my-3 py-3" *ngIf="!error; else errorContainer">
+    <div class="text-center my-3 py-3" *ngIf="status==1; else errorContainer">
         <div class="spinner-border text-success" style="height: 8em;width: 8em;">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
 </ng-template>
 <ng-template #errorContainer>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger" *ngIf="status==2">
         <span *ngIf="error==1">No internet connection. Please check your internet connection.</span>
         <span *ngIf="error==2">No matching repository found. Try searching a different name.</span>
         <span *ngIf="error==3">Something went wrong.</span>

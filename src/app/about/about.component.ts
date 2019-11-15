@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoConnectionError } from '../commons/no-connection.error';
 import { NothingFoundError } from '../commons/nothing-found.error';
+import { NullTemplateVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-about',
@@ -15,6 +16,7 @@ export class AboutComponent implements OnInit {
   username: string
   repos = []
   error:Number
+  status:Number
   searchForm: FormGroup
   constructor(private service: DataService, private activeRoute: ActivatedRoute, private formBuilder: FormBuilder, private router:Router) { }
   getData() {
@@ -29,7 +31,7 @@ export class AboutComponent implements OnInit {
       }else{
         this.error = 3
       }
-      console.log(this.error)
+      this.status = 2
     })
   }
   getRepositories() {
@@ -43,10 +45,11 @@ export class AboutComponent implements OnInit {
       this.repos = null
       if (response['params'].search != null) {
         this.username = response['params'].search
-      } else {
-        this.username = 'akpatel363'
+        this.status = 1
+        this.getData()
+      }else{
+        this.status = 0 
       }
-      this.getData()
     })
     this.searchForm = this.formBuilder.group({
       'username':[this.username,Validators.required]

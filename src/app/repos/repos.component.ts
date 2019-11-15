@@ -16,11 +16,11 @@ export class ReposComponent implements OnInit{
   currentResults:number
   currentPage:number
   error=0
+  status:Number
   query:string
   constructor(private service:DataService,private formBuilder:FormBuilder,private router:Router,private route:ActivatedRoute) {}
   searched(query:string){
     if(this.searchGroup.valid){
-      this.resetProperties()
       this.router.navigate(['/repository'],{
         queryParams:{
           name:query,
@@ -38,10 +38,13 @@ export class ReposComponent implements OnInit{
   }
   ngOnInit(){
     this.route.queryParamMap.subscribe((params)=>{
+      this.resetProperties()
       if(params.get('name')!=null){
         this.query = params.get('name')
         Number.parseInt(params.get('pageno'))?this.currentPage = Number.parseInt(params.get('pageno')):this.currentPage=1
         this.searchRepos()
+      }else{
+        this.status = 0
       }
     })
     this.searchGroup = this.formBuilder.group({
@@ -49,6 +52,7 @@ export class ReposComponent implements OnInit{
     })
   }
   searchRepos(){
+    this.status = 1
     this.service.searchRepositories(this.query,this.currentPage).subscribe((response)=>{
       response['total_count']==0?this.error=2:this.parseResults(response)
     },(error)=>{
@@ -59,6 +63,7 @@ export class ReposComponent implements OnInit{
       }else{
         this.error = 3
       }
+      this.status = 2
     })
   }
   parseResults(response){
@@ -69,7 +74,6 @@ export class ReposComponent implements OnInit{
   pageChanged(no:number){
     if(no>=1&&this.currentResults==12&&no!=this.currentPage){
       var name = this.query
-      this.resetProperties()
       this.router.navigate(['/repository'],{
         queryParams:{
           name,
