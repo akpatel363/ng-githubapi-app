@@ -3,10 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { ReposComponent } from './repos/repos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  {path:'',pathMatch:'full',redirectTo:'/user'},
-  {path:'user',component:AboutComponent},
+  {path:'',pathMatch:'full',redirectTo:'/users'},
+  {path:'users',component:UsersComponent},
+  {path:'about',component:AboutComponent},
   {path:'repository',component:ReposComponent},
   {path:'**',component:PageNotFoundComponent}
 ];

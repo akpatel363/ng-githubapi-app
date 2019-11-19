@@ -10,7 +10,7 @@
     </div>
     <div class="card-footer">
         <a [href]="repo['svn_url']" class="btn btn-primary mr-1">Repository</a>
-        <a [routerLink]="'/user'" [queryParams]="{search:repo['owner']['login']}" class=" btn btn-success mr-1">Author</a>
+        <a [routerLink]="'/about'" [queryParams]="{search:repo['owner']['login']}" class=" btn btn-success mr-1">Author</a>
         <a *ngIf="repo['homepage']!=''&&repo['homepage']!=null" [href]="repo['homepage']" class="btn btn-dark">Visit</a>
     </div>
 </div>

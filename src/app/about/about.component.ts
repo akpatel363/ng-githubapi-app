@@ -17,8 +17,7 @@ export class AboutComponent implements OnInit {
   repos = []
   error:Number
   status:Number
-  searchForm: FormGroup
-  constructor(private service: DataService, private activeRoute: ActivatedRoute, private formBuilder: FormBuilder, private router:Router) { }
+  constructor(private service: DataService, private activeRoute: ActivatedRoute, private router:Router) { }
   getData() {
     this.service.getUser(this.username).subscribe((response) => {
       this.userData = response
@@ -51,15 +50,5 @@ export class AboutComponent implements OnInit {
         this.status = 0 
       }
     })
-    this.searchForm = this.formBuilder.group({
-      'username':[this.username,Validators.required]
-    })
-  }
-  submit(){
-    if(this.searchForm.valid){
-      this.router.navigate(['/user'],{queryParams:{
-        search:this.searchForm.value.username
-      }})
-    }
   }
 }

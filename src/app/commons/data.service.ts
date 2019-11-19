@@ -21,6 +21,11 @@ export class DataService {
       return response
     }),catchError(this.handleError))
   }
+  searchUsers(query:string,page:number){
+    return this.http.get(`https://api.github.com/search/users?per_page=12&q=${encodeURIComponent(query)}&page=${page}`).pipe(map((response)=>{
+      return response
+    }),catchError(this.handleError))
+  }
   handleError(error){
     if(error.status==0){
       return throwError(new NoConnectionError(error))
@@ -30,7 +35,7 @@ export class DataService {
     return throwError(new AppError(error))
   }
   searchRepositories(query:string,page:number){
-    return this.http.get(`https://api.github.com/search/repositories?q=${query}&page=${page}&per_page=12`).pipe(map(response=>{
+    return this.http.get(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&page=${page}&per_page=12`).pipe(map(response=>{
       return response
     }),catchError(this.handleError))
   }

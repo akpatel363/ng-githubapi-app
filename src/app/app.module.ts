@@ -13,6 +13,7 @@ import { DescriptionPipe } from './commons/description.pipe';
 import { SearchedRepositoryComponent } from './searched-repository/searched-repository.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     DescriptionPipe,
     SearchedRepositoryComponent,
     PageNotFoundComponent,
-    FooterComponent
+    FooterComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
