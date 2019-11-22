@@ -14,6 +14,7 @@ import { SearchedRepositoryComponent } from './searched-repository/searched-repo
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { FooterComponent } from './footer/footer.component';
 import { UsersComponent } from './users/users.component';
+import { AboutPComponent } from './about-p/about-p.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UsersComponent } from './users/users.component';
     SearchedRepositoryComponent,
     PageNotFoundComponent,
     FooterComponent,
-    UsersComponent
+    UsersComponent,
+    AboutPComponent
   ],
   imports: [
     BrowserModule,

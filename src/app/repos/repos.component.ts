@@ -50,6 +50,7 @@ export class ReposComponent implements OnInit{
         this.error = 2
       }else{
         this.repos = response['items']
+        console.log(this.repos)
       }
     },(error)=>{
       this.status = 3

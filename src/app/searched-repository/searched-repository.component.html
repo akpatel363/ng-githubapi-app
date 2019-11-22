@@ -3,10 +3,14 @@
         <h4 class="m-auto">{{ repo['name'] }}</h4>
     </div>
     <div class="card-body">
-        <h5>By : <strong>{{ repo['owner']['login'] }}</strong></h5>
-        <p class="card-text" *ngIf="repo['language']!=null">Language : <strong>{{ repo['language'] }}</strong></p>
-        <p class="card-text">Stars : <strong>{{ repo['stargazers_count'] }}</strong></p>
-        <p class="card-text" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
+        <h5 class="mb-2">By : {{ repo['owner']['login'] }}</h5>
+        <h5 class="card-text my-1" *ngIf="repo['language']!=null">{{ repo['language'] }}</h5>
+        <h5 class="card-text my-2">
+            <span class="mr-2"><i class="fa fa-star"></i> {{ repo['stargazers_count'] }}</span>
+            <span class="mx-2"><i class="fa fa-code-fork"></i> {{ repo['forks_count'] }}</span>
+            <span class="mx-2"><i class="fa fa-binoculars"></i> {{ repo['watchers_count'] }}</span>
+        </h5>
+        <p class="card-text my-1" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
     </div>
     <div class="card-footer">
         <a [href]="repo['svn_url']" class="btn btn-primary mr-1">Repository</a>
