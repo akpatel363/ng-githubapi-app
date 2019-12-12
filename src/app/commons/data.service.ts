@@ -31,11 +31,17 @@ export class DataService {
       return throwError(new NoConnectionError(error))
     }else if(error.status==404||error.status==409){
       return throwError(new NothingFoundError(error))
+    }else if(error.message = "Hello"){
+      return throwError(new NothingFoundError())
     }
     return throwError(new AppError(error))
   }
   searchRepositories(query:string,page:number){
     return this.http.get(`https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&page=${page}&per_page=12`).pipe(map(response=>{
+        console.log(response)
+      if(response['total_count']==0){
+        throw new NothingFoundError()
+      }
       return response
     }),catchError(this.handleError))
   }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../commons/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoConnectionError } from '../commons/no-connection.error';
 import { NothingFoundError } from '../commons/nothing-found.error';
-import { NullTemplateVisitor } from '@angular/compiler';
 
 @Component({
   selector: 'app-about',
@@ -39,11 +37,11 @@ export class AboutComponent implements OnInit {
     })
   }
   ngOnInit() {
-    this.activeRoute.queryParamMap.subscribe((response) => {
+    this.activeRoute.paramMap.subscribe(response=>{
       this.userData = null
       this.repos = null
-      if (response['params'].search != null) {
-        this.username = response['params'].search
+      if (response['params'].username != null) {
+        this.username = response['params'].username
         this.status = 1
         this.getData()
       }else{

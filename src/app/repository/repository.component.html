@@ -9,13 +9,10 @@
             <span class="mx-2"><i class="fa fa-code-fork"></i> {{ repo['forks_count'] }}</span>
             <span class="mx-2"><i class="fa fa-binoculars"></i> {{ repo['watchers_count'] }}</span>
         </h5>
-        <p class="card-text" *ngIf="repo['description']!=null; else temp">{{ repo['description']|description }}</p>
+        <p class="card-text" >{{ repo['description']|description }}</p>
     </div>
     <div class="card-footer">
         <a [href]="repo['svn_url']" class="btn btn-primary mr-2">See Repository</a>
         <a *ngIf="repo['homepage']!=null&&repo['homepage']!=''" [href]="repo['homepage']" class="btn btn-success">Visit</a>
     </div>
 </div>
-<ng-template #temp>
-    <p class="card-text">This is a Repository</p>
-</ng-template>

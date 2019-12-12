@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/commons/data.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NoConnectionError } from '../commons/no-connection.error';
 import { NothingFoundError } from '../commons/nothing-found.error';
-import { ThrowStmt } from '@angular/compiler';
+
 @Component({
   selector: 'app-repos',
   templateUrl: './repos.component.html',
@@ -20,10 +20,7 @@ export class ReposComponent implements OnInit{
   searched(query:string){
     if(this.searchGroup.valid){
       this.router.navigate(['/repository'],{
-        queryParams:{
-          query,
-          page:1
-        }
+        queryParams:{query, page:1}
       })
     }
   }
@@ -35,7 +32,7 @@ export class ReposComponent implements OnInit{
           'query':params.get('query'),
           'page':params.get('page')&&!isNaN(Number.parseInt(params.get('page')))?Number.parseInt(params.get('page')):1,
         }
-        this.status = 1;
+        this.status = 1
         this.searchRepos()
       }
     })
@@ -45,13 +42,7 @@ export class ReposComponent implements OnInit{
   }
   searchRepos(){
     this.service.searchRepositories(this.currData['query'],this.currData['page']).subscribe((response)=>{
-      if(response['items'].length==0){
-        this.status = 2
-        this.error = 2
-      }else{
-        this.repos = response['items']
-        console.log(this.repos)
-      }
+      this.repos = response['items']
     },(error)=>{
       this.status = 3
       if(error instanceof NoConnectionError){

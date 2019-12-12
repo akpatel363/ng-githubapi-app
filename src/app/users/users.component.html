@@ -7,9 +7,9 @@
     </div>
     <div class="result-container" *ngIf="users!=null&&users.length!=0; else nothingFound">
         <div class="list-group">
-            <li class="list-group-item p-2" *ngFor="let user of users">
+            <li class="list-group-item p-2" *ngFor="let user of users" [routerLink]="['/about',user['login']]">
                 <img [src]="user['avatar_url']" alt="Avatar" width="75px" height="75px">
-                <h4 routerLink="/about" style="cursor: pointer;" [queryParams]="{search:user['login']}" class=" ml-3 d-inline">
+                <h4 style="cursor: pointer;" class=" ml-3 d-inline">
                     {{ user['login'] }}</h4>
             </li>
         </div>

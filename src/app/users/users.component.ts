@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../commons/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InstantiateExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-users',
@@ -19,10 +18,7 @@ export class UsersComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe(params=>{
       if(params.get('q')){
         this.users = null
-        this.currData = {
-          'q':params.get('q'),
-          'page':params.get('page')&&!isNaN(Number.parseInt(params.get('page')))?Number.parseInt(params.get('page')):1,
-        }
+        this.currData = {q:params.get('q'), page:params.get('page')&&!isNaN(Number.parseInt(params.get('page')))?Number.parseInt(params.get('page')):1}
         this.status = 1
         this.searchUsers()
       }
@@ -34,10 +30,7 @@ export class UsersComponent implements OnInit {
   submitForm(){
     if(this.searchForm.valid){
       this.router.navigate(['/users'],{
-        queryParams:{
-          'q':this.searchForm.value['query'],
-          'page':1
-        }
+        queryParams:{q:this.searchForm.value['query'], page:1}
       })
     }
   }

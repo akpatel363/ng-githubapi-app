@@ -9,7 +9,7 @@ import { AboutPComponent } from './about-p/about-p.component';
 const routes: Routes = [
   {path:'',pathMatch:'full',redirectTo:'/users'},
   {path:'users',component:UsersComponent},
-  {path:'about',component:AboutComponent},
+  {path:'about/:username',component:AboutComponent},
   {path:'repository',component:ReposComponent},
   {path:'about-app',component:AboutPComponent},
   {path:'**',component:PageNotFoundComponent}
