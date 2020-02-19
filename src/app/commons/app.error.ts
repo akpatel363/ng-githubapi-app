@@ -1,5 +1,6 @@
-import { HttpErrorResponse } from '@angular/common/http';
-
 export class AppError {
-    constructor(private error?:HttpErrorResponse){}
+    message:string
+    constructor(msg="Something went wrong."){
+        this.message = msg
+    }
 }

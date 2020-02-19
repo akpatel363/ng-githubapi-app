@@ -1,0 +1,4 @@
+<li class="list-group-item p-2" style="cursor: pointer;" routerLink="/about/{{user['login']}}">
+    <img [src]="user['avatar_url']" alt="Avatar" width="75px" height="75px">
+    <h4 class=" ml-3 d-inline">{{ user['login'] }}</h4>
+</li>

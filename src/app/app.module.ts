@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { AboutComponent } from './about/about.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { ReposComponent } from './repos/repos.component';
@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FooterComponent } from './footer/footer.component';
 import { UsersComponent } from './users/users.component';
 import { AboutPComponent } from './about-p/about-p.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +29,14 @@ import { AboutPComponent } from './about-p/about-p.component';
     PageNotFoundComponent,
     FooterComponent,
     UsersComponent,
-    AboutPComponent
+    AboutPComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
   providers: [
     {provide:ErrorHandler,useClass:AppErrorHandler}

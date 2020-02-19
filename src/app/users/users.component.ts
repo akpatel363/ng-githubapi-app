@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../commons/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,37 +8,35 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  searchForm:FormGroup
+  query:string
+  page:number
   users:Array<Object>
-  status:number
-  currData = {}
-  constructor(private formBuilder:FormBuilder,private service:DataService,private activatedRoute:ActivatedRoute,private router:Router) {}
+  error:string
+  constructor(private service:DataService,private activatedRoute:ActivatedRoute,private router:Router) {}
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe(params=>{
+      this.error = this.users = null
       if(params.get('q')){
-        this.users = null
-        this.currData = {q:params.get('q'), page:params.get('page')&&!isNaN(Number.parseInt(params.get('page')))?Number.parseInt(params.get('page')):1}
-        this.status = 1
+        this.page = parseInt(params.get('page'))
+        this.page = this.page<1?1:this.page
+        this.query = params.get('q')
         this.searchUsers()
       }
     })
-    this.searchForm = this.formBuilder.group({
-      'query':[this.currData['q'],Validators.required]
-    })
   }
-  submitForm(){
-    if(this.searchForm.valid){
-      this.router.navigate(['/users'],{
-        queryParams:{q:this.searchForm.value['query'], page:1}
-      })
+  search(){
+    if(this.query){
+      this.router.navigate(['/users'],{queryParams:{q:this.query, page:1}})
     }
   }
   searchUsers(){
-    this.service.searchUsers(this.currData['q'],this.currData['page']).subscribe(response=>{
-      this.status = 2
+    const obs = this.service.searchUsers(this.query,this.page).subscribe(response=>{
       this.users = response['items']
     },error=>{
-      this.status = 3
+      this.error=error.message
+      obs.unsubscribe()
+    },()=>{
+      obs.unsubscribe()
     })
   }
 }

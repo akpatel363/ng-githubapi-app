@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../commons/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NoConnectionError } from '../commons/no-connection.error';
-import { NothingFoundError } from '../commons/nothing-found.error';
 
 @Component({
   selector: 'app-about',
@@ -11,42 +9,32 @@ import { NothingFoundError } from '../commons/nothing-found.error';
 })
 export class AboutComponent implements OnInit {
   userData: any
-  username: string
   repos = []
-  error:Number
+  error:string
   status:Number
   constructor(private service: DataService, private activeRoute: ActivatedRoute, private router:Router) { }
-  getData() {
-    this.service.getUser(this.username).subscribe((response) => {
+  getData(username) {
+    const obs = this.service.getUser(username).subscribe((response) => {
       this.userData = response
-      this.getRepositories()
+      this.getRepositories(username)
     },(e)=>{
-      if(e instanceof NoConnectionError){
-        this.error = 1
-      }else if(e instanceof NothingFoundError){
-        this.error = 2
-      }else{
-        this.error = 3
-      }
-      this.status = 2
-    })
+      this.error = e.message
+      obs.unsubscribe()
+    },()=>obs.unsubscribe())
   }
-  getRepositories() {
-    this.service.getRepos(this.username).subscribe((response) => {
-      this.repos = response
-    })
+  getRepositories(username) {
+    const obs = this.service.getRepos(username).subscribe((response) => {
+      this.repos = response as Array<any>
+    },(err)=>{
+      this.error = err.message
+      obs.unsubscribe()
+    },()=>obs.unsubscribe())
   }
   ngOnInit() {
     this.activeRoute.paramMap.subscribe(response=>{
-      this.userData = null
-      this.repos = null
-      if (response['params'].username != null) {
-        this.username = response['params'].username
-        this.status = 1
-        this.getData()
-      }else{
-        this.status = 0 
-      }
+      this.error = this.userData = this.repos = null
+      this.status = 1
+      this.getData(response.get('username'))
     })
   }
 }
