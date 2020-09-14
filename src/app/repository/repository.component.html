@@ -1,18 +1,19 @@
-<div class="card h-100">
+<div class="card h-100 shadow-sm">
     <div class="card-header">
-        <h4 class="m-auto"><i class="fa" [ngClass]="{'fa-code-fork': repo['fork'],'fa-book': !repo['fork'] }"></i> {{ repo['name'] }}</h4>
+        <h4 class="m-auto d-inline">
+            <i class="fa mr-2" [ngClass]="{'fa-code-fork': repo['fork'],'fa-book': !repo['fork'] }"></i>
+            <a [href]="repo['svn_url']">{{ repo['name'] }}</a>
+        </h4>
     </div>
     <div class="card-body">
-        <h5 class="card-text mb-3" *ngIf="repo['language']!=null">{{ repo['language'] }}</h5>
+        <h5 class="card-text mb-3" *ngIf="repo['language']!=null">
+            <i class="fa fa-pencil"></i> {{ repo['language'] }}
+        </h5>
         <h5 class="card-text mb-3">
             <span class="mr-2"><i class="fa fa-star"></i> {{ repo['stargazers_count'] }}</span>
             <span class="mx-2"><i class="fa fa-code-fork"></i> {{ repo['forks_count'] }}</span>
             <span class="mx-2"><i class="fa fa-binoculars"></i> {{ repo['watchers_count'] }}</span>
         </h5>
-        <p class="card-text" >{{ repo['description']|description }}</p>
-    </div>
-    <div class="card-footer">
-        <a [href]="repo['svn_url']" class="btn btn-primary mr-2">See Repository</a>
-        <a *ngIf="repo['homepage']!=null&&repo['homepage']!=''" [href]="repo['homepage']" class="btn btn-success">Visit</a>
+        <p class="card-text">{{ repo['description']|description }}</p>
     </div>
 </div>

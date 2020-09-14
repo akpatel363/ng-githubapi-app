@@ -1,20 +1,26 @@
-<div class="card h-100">
+<div class="card h-100 shadow-sm">
     <div class="card-header">
-        <h4 class="m-auto">{{ repo['name'] }}</h4>
+        <h4 class="m-auto">
+            <i class="fa fa-book mr-2"></i>
+            <a [href]="repo['svn_url']">{{ repo["name"] }}</a>
+        </h4>
     </div>
     <div class="card-body">
-        <h5 class="mb-2">By : {{ repo['owner']['login'] }}</h5>
-        <h5 class="card-text my-1" *ngIf="repo['language']!=null">{{ repo['language'] }}</h5>
-        <h5 class="card-text my-2">
-            <span class="mr-2"><i class="fa fa-star"></i> {{ repo['stargazers_count'] }}</span>
-            <span class="mx-2"><i class="fa fa-code-fork"></i> {{ repo['forks_count'] }}</span>
-            <span class="mx-2"><i class="fa fa-binoculars"></i> {{ repo['watchers_count'] }}</span>
+        <h5 class="mb-2">
+            <i class="fa fa-user mr-2"></i>
+            <a [routerLink]="['/about', repo['owner']['login']]">{{repo["owner"]["login"]}}</a>
         </h5>
-        <p class="card-text my-1">{{ repo['description']|description }}</p>
+        <h5 class="card-text my-1" *ngIf="repo['language'] != null">
+            <i class="fa fa-pencil"></i> {{ repo["language"] }}
+        </h5>
+        <h5 class="card-text my-2">
+            <span class="mr-2"><i class="fa fa-star"></i> {{ repo["stargazers_count"] }}</span>
+            <span class="mx-2"><i class="fa fa-code-fork"></i> {{ repo["forks_count"] }}</span>
+            <span class="mx-2"><i class="fa fa-binoculars"></i> {{ repo["watchers_count"] }}</span>
+        </h5>
+        <p class="card-text my-1">{{ repo["description"] | description }}</p>
     </div>
-    <div class="card-footer">
-        <a [href]="repo['svn_url']" class="btn btn-primary mr-1">Repository</a>
-        <a [routerLink]="['/about',repo['owner']['login']]" class=" btn btn-success mr-1">Author</a>
+    <!-- <div class="card-footer">
         <a *ngIf="repo['homepage']!=''&&repo['homepage']!=null" [href]="repo['homepage']" class="btn btn-dark">Visit</a>
-    </div>
+    </div> -->
 </div>

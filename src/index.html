@@ -1,61 +1,72 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Github API App</title>
   <base href="/">
   <style>
-      .spinner-container {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
+    .spinner-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .spinner-container span {
+      border-top: 10px solid transparent;
+      border-right: 10px solid transparent;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spinner-container span:nth-child(1) {
+      width: 180px;
+      height: 180px;
+      border-left: 10px solid royalblue;
+      border-bottom: 10px solid royalblue;
+      animation: 1.5s loader-rotate infinite linear;
+    }
+
+    .spinner-container span:nth-child(2) {
+      width: 150px;
+      height: 150px;
+      border-left: 10px solid tomato;
+      border-bottom: 10px solid tomato;
+      animation: 1s loader-rotate infinite linear;
+    }
+
+    .spinner-container span:nth-child(3) {
+      width: 120px;
+      height: 120px;
+      border-left: 10px solid gold;
+      border-bottom: 10px solid gold;
+      animation: .5s loader-rotate infinite linear;
+    }
+
+    @keyframes loader-rotate {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
       }
-      .spinner-container span {
-        border-top: 10px solid transparent;
-        border-right: 10px solid transparent;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
+
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
       }
-      .spinner-container span:nth-child(1) {
-        width: 180px;
-        height: 180px;
-        border-left: 10px solid royalblue;
-        border-bottom: 10px solid royalblue;
-        animation: 1.5s loader-rotate infinite linear;
-      }
-      .spinner-container span:nth-child(2) {
-        width: 150px;
-        height: 150px;
-        border-left: 10px solid tomato;
-        border-bottom: 10px solid tomato;
-        animation: 1s loader-rotate infinite linear;
-      }
-      .spinner-container span:nth-child(3) {
-        width: 120px;
-        height: 120px;
-        border-left: 10px solid gold;
-        border-bottom: 10px solid gold;
-        animation: .5s loader-rotate infinite linear;
-      }
-      @keyframes loader-rotate {
-        0% {
-          transform: translate(-50%, -50%) rotate(0deg);
-        }
-        100% {
-          transform: translate(-50%, -50%) rotate(360deg);
-        }
-      }
-    </style>
+    }
+  </style>
   <meta name="theme-color" content="#5cb85c">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
   <app-root>
     <div class="spinner-container">
@@ -65,4 +76,5 @@
     </div>
   </app-root>
 </body>
+
 </html>
