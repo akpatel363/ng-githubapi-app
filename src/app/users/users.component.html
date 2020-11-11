@@ -2,15 +2,15 @@
   <form #f="ngForm" (ngSubmit)="submit(f)">
     <div class="input-group mt-3">
       <input
-        ngModel
         required
         type="text"
         name="query"
+        [(ngModel)]="query"
         placeholder="Search users here....."
         class="form-control"
       />
       <button type="submit" class="btn btn-primary" [disabled]="f.invalid">
-        Search
+        <i class="fa fa-search"></i> Search
       </button>
     </div>
   </form>
@@ -21,53 +21,17 @@
     <div class="list-group">
       <user *ngFor="let user of users" [user]="user"></user>
     </div>
-    <nav class="mt-3">
-      <ul class="pagination justify-content-center">
-        <li class="page-item">
-          <a
-            routerLink="/users"
-            [queryParams]="{ q: query, page: page - 1 }"
-            class="page-link"
-            *ngIf="page != 1"
-            >Previous</a
-          >
-        </li>
-        <li class="page-item active">
-          <a routerLink="/users" class="page-link">{{ page }}</a>
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/users"
-            [queryParams]="{ q: query, page: page + 1 }"
-            class="page-link"
-            >{{ page + 1 }}</a
-          >
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/users"
-            [queryParams]="{ q: query, page: page + 2 }"
-            class="page-link"
-            >{{ page + 2 }}</a
-          >
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/users"
-            [queryParams]="{ q: query, page: page + 1 }"
-            class="page-link"
-            >Next</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <pagination
+      [page]="page"
+      link="/users"
+      [query]="{ query: query }"
+    ></pagination>
   </div>
   <div class="alert alert-danger my-3" *ngIf="error != null">{{ error }}</div>
 </div>
 <ng-template #nothingFound>
-  <div class="text-center my-3 py-3" *ngIf="this.page != null && error == null">
-    <div class="spinner-border text-success" style="width: 8em; height: 8em">
-      <span class="sr-only">Loading</span>
-    </div>
+  <spinner *ngIf="page != null && error == null && !users"></spinner>
+  <div class="alert alert-primary my-2" *ngIf="users">
+    No users with username <b>{{query}}</b> found.
   </div>
 </ng-template>

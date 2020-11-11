@@ -1,0 +1,11 @@
+<nav class="my-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{ 'disabled': page == 1 }">
+      <a [routerLink]="link" [queryParams]="getQueryParams(-1)"  class="page-link">Previous</a>
+    </li>
+    <li class="page-item active">
+      <p class="page-link">{{ page }}</p>
+    </li>
+    <li class="page-item"><a [routerLink]="link" [queryParams]="getQueryParams(1)" class="page-link">Next</a></li>
+  </ul>
+</nav>

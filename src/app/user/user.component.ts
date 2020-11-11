@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { User } from "../commons/models/User";
 
 @Component({
-  selector: 'user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: "user",
+  templateUrl: "./user.component.html",
+  styleUrls: ["./user.component.css"],
 })
-export class UserComponent{
-  @Input() user:any
-  constructor() { }
+export class UserComponent {
+  @Input() user: User;
+  constructor() {}
 }

@@ -2,73 +2,35 @@
   <form #f="ngForm" (ngSubmit)="submit(f)">
     <div class="input-group mt-3">
       <input
-        ngModel
         required
         type="text"
         class="form-control"
         name="query"
+        [(ngModel)]="query"
         placeholder="Search repositories here...."
       />
       <button type="submit" [disabled]="f.invalid" class="btn btn-primary">
-        Search
+        <i class="fa fa-search"></i> Search
       </button>
     </div>
   </form>
   <div *ngIf="repos != null && repos.length != 0; else loading">
-    <div class="row my-3">
+    <div class="row g-3 my-1">
       <div
-        class="col-xl-4 col-lg-4 col-md-6 col-sm-12 py-1"
+        class="col-lg-4 col-md-6 col-sm-12"
         *ngFor="let repo of repos"
       >
-        <app-searched-repository [repo]="repo"></app-searched-repository>
+        <repository [repo]="repo"></repository>
       </div>
     </div>
-    <nav class="mt-2">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" *ngIf="page != 1">
-          <a
-            routerLink="/repository"
-            [queryParams]="{ query: query, page: page - 1 }"
-            class="page-link"
-            >Previous</a
-          >
-        </li>
-        <li class="page-item active">
-          <a class="page-link">{{ page }}</a>
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/repository"
-            [queryParams]="{ query: query, page: page + 1 }"
-            class="page-link"
-            >{{ page + 1 }}</a
-          >
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/repository"
-            [queryParams]="{ query: query, page: page + 2 }"
-            class="page-link"
-            >{{ page + 2 }}</a
-          >
-        </li>
-        <li class="page-item">
-          <a
-            routerLink="/repository"
-            [queryParams]="{ query: query, page: page + 1 }"
-            class="page-link"
-            >Next</a
-          >
-        </li>
-      </ul>
-    </nav>
+    <pagination [page]="page" link="/repository" [query]="{ query: query }">
+    </pagination>
   </div>
-  <div class="alert alert-danger" *ngIf="error != null">{{ error }}</div>
+  <div class="alert alert-danger my-2" *ngIf="error != null">{{ error }}</div>
 </div>
 <ng-template #loading>
-  <div class="text-center my-3 py-3" *ngIf="page != null && error == null">
-    <div class="spinner-border text-success" style="height: 8em; width: 8em">
-      <span class="sr-only">Loading...</span>
-    </div>
+  <spinner *ngIf="page != null && error == null && !repos"></spinner>
+  <div class="alert alert-primary my-2" *ngIf="repos">
+    No repositories named <b>{{query}}</b> found.
   </div>
 </ng-template>

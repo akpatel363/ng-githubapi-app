@@ -1,57 +1,22 @@
-<div class="container mt-3">
-  <div *ngIf="userData != null; else loading">
-    <div class="row">
-      <div class="col-lg-3 col-xl-3 col-md-4 col-5">
-        <img
-          [src]="userData['avatar_url']"
-          alt="Profile Picture"
-          class="img-thumbnail"
-        />
-      </div>
-      <div class="col-lg-9 col-xl-9 col-md-8 col-7">
-        <h4 class="my-2">
-          <strong>{{ userData["name"] }}</strong>
-        </h4>
-        <p class="m-0">
-          <i class="fa fa-user mr-1"></i>
-          <a [href]="userData['html_url']">{{ userData["login"] }}</a>
-        </p>
-        <p class="m-0" *ngIf="userData['location']">
-          <i class="fa fa-map-marker"></i> {{ userData["location"] }}
-        </p>
-        <p class="mb-2">{{ userData["bio"] }}</p>
-        <a
-          *ngIf="userData['blog']"
-          [href]="userData['blog']"
-          class="btn mt-1 btn-primary mr-2"
-          >Blog</a
-        >
-      </div>
-    </div>
-    <h4
-      *ngIf="repos == null || repos.length == 0; else repositories"
-      class="mt-3 ml-3"
-    >
-      No Repositories Found.....
-    </h4>
-  </div>
-  <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+<div class="bg-light p-4 text-center">
+  <p class="display-4 my-4">About</p>
 </div>
-<ng-template #repositories>
-  <h3 class="mt-3 mb-0">Repositories</h3>
-  <div class="row">
-    <div class="col-md-6 col-lg-4 col-sm-12 g-3" *ngFor="let repo of repos">
-      <app-repository [repo]="repo"></app-repository>
-    </div>
-  </div>
-</ng-template>
-<ng-template #loading>
-  <div class="spinner-container text-center my-4" *ngIf="!error">
-    <div
-      class="spinner-border text-success mt-4"
-      style="height: 8em; width: 8em"
-    >
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-</ng-template>
+<div class="container pt-2">
+  <h5 class="text-justify">
+    This app is made using angular 8 and bootstrap 4. This app uses the
+    <a href="https://api.github.com">Github's v3 API</a> as backend to search
+    repository, users and to fetch user details.
+  </h5>
+  <a href="https://github.com/akpatel363" class="mt-2 btn btn-dark mr-2">
+    <i class="fa fa-github"></i> Profile
+  </a>
+  <a
+    href="https://github.com/akpatel363/ng-githubapi-app"
+    class="mt-2 btn mr-2 btn-primary"
+  >
+    <i class="fa fa-book"></i> Repository
+  </a>
+  <a href="https://akpatel363.github.io" class="mt-2 btn btn-danger mr-2">
+    <i class="fa fa-github-alt"></i> Blog
+  </a>
+</div>

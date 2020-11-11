@@ -1,0 +1,48 @@
+<div class="container mt-3">
+  <div *ngIf="user != null; else loading">
+    <div class="row">
+      <div class="col-lg-3 col-xl-3 col-md-4 col-5">
+        <img
+          [src]="user.avatar_url"
+          alt="Profile Picture"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-lg-9 col-xl-9 col-md-8 col-7">
+        <h4 class="my-2 display-6" *ngIf="user.name">{{ user.name }}</h4>
+        <h5 class="mb-2 font-weight-light">
+          <i class="fa fa-user mr-1"></i>
+          <a [href]="user.html_url" class="text-decoration-none">{{
+            user.login
+          }}</a>
+        </h5>
+        <p class="m-0" *ngIf="user.location">
+          <i class="fa fa-map-marker"></i> {{ user.location }}
+        </p>
+        <p class="mb-2">{{ user.bio }}</p>
+        <a
+          *ngIf="user.blog"
+          [href]="user.blog"
+          class="btn mt-1 btn-primary mr-2"
+        >
+          Blog
+        </a>
+      </div>
+    </div>
+    <ng-container *ngIf="repos && repos.length != 0; else noRepos">
+      <h3 class="mt-3 mb-0">Repositories</h3>
+      <div class="row g-3 my-2">
+        <div class="col-md-6 col-lg-4 col-sm-12" *ngFor="let repo of repos">
+          <repository [repo]="repo"></repository>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="alert alert-danger" *ngIf="error">{{ error }}</div>
+</div>
+<ng-template #noRepos>
+  <h4 class="mt-3 ml-3">No Repositories Found.....</h4>
+</ng-template>
+<ng-template #loading>
+  <spinner *ngIf="!error"></spinner>
+</ng-template>
